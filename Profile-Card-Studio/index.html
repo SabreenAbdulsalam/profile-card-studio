@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استوديو البطاقات الرسمي</title>
+    <!-- خط Cairo وأيقونات Bootstrap الرسمية -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="card-style.css">
+</head>
+<body>
+
+    <!-- إضاءات خلفية لإبراز الزجاج العصري -->
+    <div class="ambient-light light-1"></div>
+    <div class="ambient-light light-2"></div>
+    <div class="ambient-light light-3"></div>
+
+    <div class="main-wrapper">
+        <!-- الواجهة الزجاجية الموحدة -->
+        <div class="modern-glass-card">
+            
+            <!-- رأس البطاقة مع زر الزائد (+) -->
+            <div class="card-top-header">
+                <div class="title-area">
+                    <h1><i class="bi bi-person-vcard-fill"></i> البطاقة التعريفية الرسمية</h1>
+                    <p>صمم بطاقة العمل التعريفية الخاصة بك بلمسة عصرية</p>
+                </div>
+                <button type="button" class="plus-action-btn" onclick="resetForNewCard()" title="إضافة بطاقة لشخص آخر">
+                    <i class="bi bi-plus-lg"></i> <span>بطاقة جديدة</span>
+                </button>
+            </div>
+
+            <!-- شريط الصورة الشخصية والرموز الرسمية بجانب بعض -->
+            <div class="avatar-glass-bar">
+                <!-- معاينة الصورة أو الرمز الرسمي + زر الرفع -->
+                <div class="upload-section">
+                    <div class="preview-ring" id="previewContainer">
+                        <i id="iconPreview" class="bi bi-person-fill"></i>
+                        <img id="imagePreview" src="" alt="الصورة الشخصية" class="hidden">
+                    </div>
+                    <div class="upload-info">
+                        <label for="fileInput" class="glass-upload-btn">
+                            <i class="bi bi-upload"></i> رفع صورة رسمية (اختياري)
+                        </label>
+                        <input type="file" id="fileInput" accept="image/*" hidden onchange="uploadCustomPhoto(event)">
+                        <span>أو اختر رمزاً رسمياً من اليسار</span>
+                    </div>
+                </div>
+
+                <!-- الرموز الرسمية الاحترافية بجانب زر الإضافة -->
+                <div class="ready-avatars">
+                    <button type="button" class="formal-avatar selected" onclick="pickFormalIcon('bi-person-fill', this)" title="مستخدم رسمي">
+                        <i class="bi bi-person-fill"></i>
+                    </button>
+                    <button type="button" class="formal-avatar" onclick="pickFormalIcon('bi-briefcase-fill', this)" title="إدارة وأعمال">
+                        <i class="bi bi-briefcase-fill"></i>
+                    </button>
+                    <button type="button" class="formal-avatar" onclick="pickFormalIcon('bi-code-slash', this)" title="تقنية معلومات وبرمجة">
+                        <i class="bi bi-code-slash"></i>
+                    </button>
+                    <button type="button" class="formal-avatar" onclick="pickFormalIcon('bi-mortarboard-fill', this)" title="أكاديمي / طالب">
+                        <i class="bi bi-mortarboard-fill"></i>
+                    </button>
+                    <button type="button" class="formal-avatar" onclick="pickFormalIcon('bi-patch-check-fill', this)" title="عضو موثق">
+                        <i class="bi bi-patch-check-fill"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- حقول الإدخال العصرية في نفس الواجهة -->
+            <div class="inputs-grid">
+                <div class="modern-field">
+                    <label for="userName"><i class="bi bi-person-badge"></i> الاسم الكامل</label>
+                    <input type="text" id="userName" placeholder="مثال: محمد عبدالله">
+                </div>
+
+                <div class="modern-field">
+                    <label for="userAge"><i class="bi bi-calendar2-check"></i> العمر</label>
+                    <input type="number" id="userAge" min="1" placeholder="أدخل العمر ">
+                    <small id="ageError" class="error-badge hidden"></small>
+                </div>
+
+                <div class="modern-field full-width">
+                    <label for="userJob"><i class="bi bi-briefcase"></i> المسمى الوظيفي</label>
+                    <input type="text" id="userJob" placeholder="مثال: مهندس برمجيات وتقنية معلومات">
+                </div>
+            </div>
+
+            <!-- زر الإنشاء الرئيسي -->
+            <button type="button" class="glow-submit-btn" onclick="buildModernCard()">
+                <i class="bi bi-check2-circle"></i> إصدار البطاقة وعرض الترحيب
+            </button>
+        </div>
+
+        <!-- واجهة الترحيب العصرية (تظهر تحت البطاقة مباشرة) -->
+        <div id="welcomeBanner" class="modern-welcome hidden">
+            <div class="welcome-content">
+                <div class="welcome-badge"><i class="bi bi-patch-check-fill"></i> بطاقة معتمدة</div>
+                <div id="welcomeText"></div>
+            </div>
+            <button type="button" class="mini-plus-btn" onclick="resetForNewCard()" title="إضافة بطاقة أخرى">
+                <i class="bi bi-plus-lg"></i>
+            </button>
+        </div>
+
+        <!-- شبكة البطاقات الشخصية المنشأة -->
+        <div id="cardsGrid" class="modern-cards-grid"></div>
+    </div>
+
+    <script src="card-builder.js"></script>
+</body>
+</html>
